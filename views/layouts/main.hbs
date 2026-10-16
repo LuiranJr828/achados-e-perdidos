@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{!-- <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8">
@@ -27,6 +27,47 @@
     <footer class="rodape">
       <div class="limite">
         <p>Projeto didático — Programação para Internet — Aula 02</p>
+      </div>
+    </footer>
+  </body>
+</html> --}}
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Sistema de cadastro de objetos perdidos e encontrados."
+    >
+    <title>{{titulo}} | Achados e Perdidos</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+
+  <body>
+    <header class="cabecalho">
+      <div class="limite cabecalho__conteudo">
+        <a class="marca" href="/">Achados e Perdidos</a>
+
+        <nav aria-label="Navegação principal">
+          <ul class="menu">
+            <li><a href="/">Início</a></li>
+            <li><a href="/itens">Lista de itens</a></li>
+           
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="limite conteudo-principal">
+      {{{body}}}
+    </main>
+
+    <footer class="rodape">
+      <div class="limite">
+        <p>Achados e Perdidos — Projeto de Programação para Internet</p>
       </div>
     </footer>
   </body>

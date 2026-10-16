@@ -1,0 +1,36 @@
+{{!-- <article class="cartao">
+  <div class="cartao__topo">
+    <span class="categoria">{{categoria}}</span>
+    <span class="identificador">#{{id}}</span>
+  </div>
+  <h2>{{titulo}}</h2>
+  <p>{{conteudo}}</p>
+  <footer class="cartao__rodape">
+    <span>{{autor}}</span>
+    <a href="/publicacoes/{{id}}">Ler publicação</a>
+  </footer>
+</article> --}}
+
+
+<article class="cartao">
+  <div class="cartao__topo">
+    <span class="categoria">{{categoria}}</span>
+    <span class="identificador">#{{id}}</span>
+  </div>
+
+  <h2>{{objeto}}</h2>
+
+  <span class="item-situacao">{{situacao}}</span>
+
+  <p class="item-local">
+    <strong>Local:</strong> {{local}}
+  </p>
+
+  <p class="item-data">
+    <strong>Data:</strong> {{formatarData data}}
+  </p>
+
+  <footer class="cartao__rodape">
+    <a href="/itens/{{id}}">Ver detalhes</a>
+  </footer>
+</article>

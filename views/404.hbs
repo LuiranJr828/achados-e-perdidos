@@ -1,6 +1,26 @@
-<section class="mensagem-sistema">
+{{!-- <section class="mensagem-sistema">
   <p class="codigo-erro">404</p>
   <h1>{{titulo}}</h1>
   <p>O endereço <code>{{caminho}}</code> não está disponível nesta aplicação.</p>
   <a class="botao" href="/">Voltar ao início</a>
+</section> --}}
+
+
+<section class="mensagem-sistema">
+  <p class="codigo-erro">404</p>
+
+  <h1>{{titulo}}</h1>
+
+  <p>
+    O endereço <code>{{caminho}}</code> não foi encontrado.
+  </p>
+
+  <p>
+    O item ou a página que você procura pode não existir
+    ou o endereço pode estar incorreto.
+  </p>
+
+  <a class="botao" href="/itens">Voltar para a lista</a>
+
+  <a class="botao-secundario" href="/">Ir para o início</a>
 </section>

@@ -1,0 +1,43 @@
+{{!-- <article class="detalhe">
+  <a class="voltar" href="/publicacoes">← Voltar para as publicações</a>
+  <p class="categoria">{{publicacao.categoria}}</p>
+  <h1>{{publicacao.titulo}}</h1>
+  <p class="detalhe__conteudo">{{publicacao.conteudo}}</p>
+  <footer>
+    <span>Por {{publicacao.autor}}</span>
+    <span>Publicada em {{formatarData publicacao.createdAt}}</span>
+  </footer>
+</article> --}}
+
+
+<article class="detalhe">
+  <a class="voltar" href="/itens">← Voltar para a lista</a>
+
+  <div class="detalhe-item">
+    <img
+      class="item-detalhe-imagem"
+      src="/{{item.imagem}}"
+      alt="Imagem do objeto: {{item.objeto}}"
+    >
+
+    <div class="detalhe-item__informacoes">
+      <p class="categoria">{{item.categoria}}</p>
+
+      <h1>{{item.objeto}}</h1>
+
+      <p>
+        <span class="item-situacao">{{item.situacao}}</span>
+      </p>
+
+      <div class="detalhe__conteudo">
+        <p><strong>Local:</strong> {{item.local}}</p>
+        <p><strong>Data da ocorrência:</strong> {{formatarData item.data}}</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Registro #{{item.id}}</span>
+    <span>Cadastrado em {{formatarData item.createdAt}}</span>
+  </footer>
+</article>
