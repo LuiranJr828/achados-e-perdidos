@@ -7,6 +7,7 @@ const sequelize = new Sequelize({
   logging: false
 });
 
-const Publicacao = require("./publicacao")(sequelize, DataTypes);
+const Item = require("./item")(sequelize, DataTypes);
 
-module.exports = { sequelize, Publicacao };
+module.exports = { sequelize, Item };
+

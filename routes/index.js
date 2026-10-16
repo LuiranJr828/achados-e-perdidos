@@ -1,16 +1,37 @@
+// const express = require("express");
+
+// const router = express.Router();
+
+// router.get("/", (req, res) => {
+//   res.render("index", {
+//     titulo: "Mural de Publicações",
+//     subtitulo: "Node.js, Express, Handlebars, Sequelize e SQLite"
+//   });
+// });
+
+// router.get("/saude", (req, res) => {
+//   res.json({ status: "ok", aplicacao: "mural-servidor-aula-02" });
+// });
+
+// module.exports = router;
+
+
 const express = require("express");
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
   res.render("index", {
-    titulo: "Mural de Publicações",
-    subtitulo: "Node.js, Express, Handlebars, Sequelize e SQLite"
+    titulo: "Achados e Perdidos",
+    subtitulo: "Sistema de cadastro de objetos perdidos e encontrados"
   });
 });
 
 router.get("/saude", (req, res) => {
-  res.json({ status: "ok", aplicacao: "mural-servidor-aula-02" });
+  res.json({
+    status: "ok",
+    aplicacao: "achados-e-perdidos"
+  });
 });
 
 module.exports = router;
