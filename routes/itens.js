@@ -54,14 +54,13 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const itens = await Item.findAll({
-      order: [["createdAt", "DESC"]],
+      order: [["data", "DESC"]],
       raw: true
     });
 
     res.render("itens/listar", {
       titulo: "Itens perdidos e achados",
-      descricao:
-        "Itens cadastrados no sistema de achados e perdidos.",
+      descricao: "Itens cadastrados no sistema de achados e perdidos.",
       itens,
       possuiItens: itens.length > 0,
       quantidade: itens.length
