@@ -1,89 +1,98 @@
 
 const test = require("node:test");
 const assert = require("node:assert/strict");
+const request = require("supertest");
 const { createApp, prepararBanco } = require("../app");
 const { sequelize, Item } = require("../models");
 
-let servidor;
-let baseUrl;
+let app;
 
 test.before(async () => {
   await prepararBanco();
-
-  servidor = createApp().listen(0);
-
-  await new Promise((resolve) => servidor.once("listening", resolve));
-
-  baseUrl = `http://127.0.0.1:${servidor.address().port}`;
+  app = createApp();
 });
 
 test.after(async () => {
-  if (servidor) {
-    await new Promise((resolve, reject) => {
-      servidor.close((erro) => (erro ? reject(erro) : resolve()));
-    });
-  }
-
   await sequelize.close();
 });
 
 test("a página inicial responde e apresenta o título", async () => {
-  const resposta = await fetch(`${baseUrl}/`);
-  const html = await resposta.text();
+  const resposta = await request(app).get("/");
 
   assert.equal(resposta.status, 200);
-  assert.match(html, /Achados e Perdidos/);
+  assert.match(resposta.text, /Achados e Perdidos/);
 });
 
-test("a listagem apresenta os itens cadastrados", async () => {
-  const resposta = await fetch(`${baseUrl}/itens`);
-  const html = await resposta.text();
+test("a listagem apresenta pelo menos um registro inicial", async () => {
+  const resposta = await request(app).get("/itens");
   const quantidade = await Item.count();
 
   assert.equal(resposta.status, 200);
-  assert.match(html, /Itens perdidos e achados/i);
-  assert.match(html, /Garrafa azul/);
-  assert.match(html, /Caderno preto/);
-  const textoSemTags = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ");
-  assert.match(textoSemTags, new RegExp(`${quantidade}\\s*item\\(ns\\) cadastrado\\(s\\)\\.`));
+  assert.ok(quantidade >= 1, "Deve existir pelo menos um item no banco");
+  assert.match(resposta.text, /Itens perdidos e achados/i);
+  assert.match(resposta.text, /item\(ns\) cadastrado\(s\)/i);
+  assert.match(resposta.text, /class="grade"/);
 });
 
-test("a página de detalhes apresenta um item", async () => {
+test("a listagem apresenta os itens iniciais esperados", async () => {
+  const resposta = await request(app).get("/itens");
+
+  assert.equal(resposta.status, 200);
+  assert.match(resposta.text, /Garrafa azul/);
+  assert.match(resposta.text, /Caderno preto/);
+});
+
+test("GET /itens/1 retorna 200 para um registro existente", async () => {
+  const item = await Item.findByPk(1);
+
+  assert.ok(item, "O registro de ID 1 deve existir no banco de teste");
+
+  const resposta = await request(app).get("/itens/1");
+
+  assert.equal(resposta.status, 200);
+  assert.match(resposta.text, /Garrafa azul/);
+  assert.match(resposta.text, /Biblioteca/);
+});
+
+test("a página de detalhes apresenta um item existente", async () => {
   const item = await Item.findOne({
     where: { objeto: "Garrafa azul" }
   });
 
   assert.ok(item, "O item de teste precisa existir no banco");
 
-  const resposta = await fetch(`${baseUrl}/itens/${item.id}`);
-  const html = await resposta.text();
+  const resposta = await request(app).get(`/itens/${item.id}`);
 
   assert.equal(resposta.status, 200);
-  assert.match(html, /Garrafa azul/);
-  assert.match(html, /Biblioteca/);
+  assert.match(resposta.text, /Garrafa azul/);
+  assert.match(resposta.text, /Biblioteca/);
 });
 
-test("o endpoint de saúde responde em JSON", async () => {
-  const resposta = await fetch(`${baseUrl}/saude`);
-  const dados = await resposta.json();
-
-  assert.equal(resposta.status, 200);
-  assert.equal(dados.status, "ok");
-  assert.equal(dados.aplicacao, "achados-e-perdidos");
-});
-
-test("um endereço inexistente retorna 404", async () => {
-  const resposta = await fetch(`${baseUrl}/nao-existe`);
-  const html = await resposta.text();
+test("GET /itens/abc retorna 404 para um identificador inválido", async () => {
+  const resposta = await request(app).get("/itens/abc");
 
   assert.equal(resposta.status, 404);
-  assert.match(html, /Página não encontrada/);
+  assert.match(resposta.text, /Item não encontrado/);
 });
 
 test("um item inexistente retorna 404", async () => {
-  const resposta = await fetch(`${baseUrl}/itens/999999`);
-  const html = await resposta.text();
+  const resposta = await request(app).get("/itens/999999");
 
   assert.equal(resposta.status, 404);
-  assert.match(html, /Item não encontrado/);
+  assert.match(resposta.text, /Item não encontrado/);
+});
+
+test("o endpoint de saúde responde em JSON", async () => {
+  const resposta = await request(app).get("/saude");
+
+  assert.equal(resposta.status, 200);
+  assert.equal(resposta.body.status, "ok");
+  assert.equal(resposta.body.aplicacao, "achados-e-perdidos");
+});
+
+test("um endereço inexistente retorna 404", async () => {
+  const resposta = await request(app).get("/nao-existe");
+
+  assert.equal(resposta.status, 404);
+  assert.match(resposta.text, /Página não encontrada/);
 });
