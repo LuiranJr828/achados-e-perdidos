@@ -20,8 +20,6 @@
     <li><strong>Servidor:</strong> devolve a página HTML ao navegador.</li>
   </ol>
 </section> --}}
-
-
 <section class="hero">
   <p class="rotulo">Sistema funcionando</p>
 
@@ -38,33 +36,16 @@
   <a class="botao" href="/itens">Consultar itens</a>
 </section>
 
-<section aria-labelledby="fluxo" class="painel">
-  <h2 id="fluxo">Como o sistema funciona</h2>
+<section aria-labelledby="recentes" class="painel">
+  <h2 id="recentes">Itens recentes</h2>
 
-  <ol class="etapas">
-    <li>
-      <strong>Navegador:</strong>
-      acessa a página inicial ou solicita a lista de itens.
-    </li>
-
-    <li>
-      <strong>Express:</strong>
-      identifica a rota correspondente à solicitação.
-    </li>
-
-    <li>
-      <strong>Sequelize:</strong>
-      consulta os registros armazenados no banco SQLite.
-    </li>
-
-    <li>
-      <strong>Handlebars:</strong>
-      combina os dados dos objetos com os templates HTML.
-    </li>
-
-    <li>
-      <strong>Servidor:</strong>
-      devolve a página pronta para ser exibida no navegador.
-    </li>
-  </ol>
+  {{#if destaques.length}}
+    <div class="grade">
+      {{#each destaques}}
+        {{> cartao-item}}
+      {{/each}}
+    </div>
+  {{else}}
+    <p class="estado-vazio">Nenhum registro foi encontrado.</p>
+  {{/if}}
 </section>
