@@ -29,12 +29,18 @@ function createApp() {
   app.set("view engine", "hbs");
   app.set("views", path.join(__dirname, "views"));
 
-  app.use(express.urlencoded({ extended: false }));
-  app.use(express.json());
-  app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
-  app.use("/", indexRouter);
-  app.use("/itens", itensRouter);
+// Middleware próprio de registro das requisições
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.originalUrl}`);
+  next();
+});
+
+app.use("/", indexRouter);
+app.use("/itens", itensRouter);
 
   // Página 404 para rotas desconhecidas
   app.use((req, res) => {

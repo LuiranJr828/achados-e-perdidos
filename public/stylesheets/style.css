@@ -1,3 +1,4 @@
+
 :root {
   --azul-900: #12304a;
   --azul-700: #1e5a82;
@@ -11,7 +12,9 @@
   --sombra: 0 10px 30px rgba(18, 48, 74, 0.09);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -24,12 +27,16 @@ body {
   line-height: 1.6;
 }
 
-a { color: var(--azul-700); }
+a {
+  color: var(--azul-700);
+}
 
 .limite {
   width: min(1120px, calc(100% - 32px));
   margin-inline: auto;
 }
+
+/* ===== Cabeçalho ===== */
 
 .cabecalho {
   color: var(--branco);
@@ -65,7 +72,12 @@ a { color: var(--azul-700); }
   text-decoration: none;
 }
 
-.menu a:hover, .menu a:focus { text-decoration: underline; }
+.menu a:hover,
+.menu a:focus {
+  text-decoration: underline;
+}
+
+/* ===== Conteúdo principal ===== */
 
 .conteudo-principal {
   flex: 1;
@@ -80,19 +92,35 @@ a { color: var(--azul-700); }
   box-shadow: var(--sombra);
 }
 
-h1, h2 { color: var(--azul-900); line-height: 1.2; }
-h1 { margin: 8px 0 16px; font-size: clamp(2rem, 5vw, 3.6rem); }
-h2 { margin-top: 0; }
+h1,
+h2 {
+  color: var(--azul-900);
+  line-height: 1.2;
+}
 
-.rotulo, .categoria {
+h1 {
+  margin: 8px 0 16px;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.rotulo,
+.categoria {
   color: var(--verde);
-  font-size: .78rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.hero__subtitulo { color: var(--azul-700); font-size: 1.2rem; font-weight: 700; }
+.hero__subtitulo {
+  color: var(--azul-700);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
 
 .botao {
   display: inline-block;
@@ -105,9 +133,16 @@ h2 { margin-top: 0; }
   text-decoration: none;
 }
 
-.botao:hover, .botao:focus { background: var(--azul-900); }
+.botao:hover,
+.botao:focus {
+  background: var(--azul-900);
+}
 
-.painel, .detalhe, .mensagem-sistema {
+/* ===== Painéis ===== */
+
+.painel,
+.detalhe,
+.mensagem-sistema {
   margin-top: 32px;
   padding: 32px;
   border: 1px solid var(--borda);
@@ -116,12 +151,33 @@ h2 { margin-top: 0; }
   box-shadow: var(--sombra);
 }
 
-.etapas { padding-left: 22px; }
-.etapas li { margin-bottom: 10px; }
+.etapas {
+  padding-left: 22px;
+}
 
-.titulo-pagina { max-width: 780px; margin-bottom: 32px; }
-.titulo-pagina h1 { font-size: clamp(2rem, 5vw, 3rem); }
-.contador { display: inline-block; padding: 8px 12px; border-radius: 8px; background: var(--azul-100); }
+.etapas li {
+  margin-bottom: 10px;
+}
+
+/* ===== Título da listagem ===== */
+
+.titulo-pagina {
+  max-width: 780px;
+  margin-bottom: 32px;
+}
+
+.titulo-pagina h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.contador {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--azul-100);
+}
+
+/* ===== Grade de itens ===== */
 
 .grade {
   display: grid;
@@ -129,86 +185,108 @@ h2 { margin-top: 0; }
   gap: 20px;
 }
 
+/* ===== Cartões ===== */
+
 .cartao {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   min-height: 280px;
-  padding: 24px;
+  padding: 16px;
   border: 1px solid var(--borda);
-  border-radius: 16px;
+  border-radius: 12px;
   background: var(--branco);
   box-shadow: var(--sombra);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cartao__topo, .cartao__rodape, .detalhe footer {
+.cartao:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(18, 48, 74, 0.14);
+}
+
+.cartao__topo {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
-}
-
-.identificador, .cartao__rodape, .detalhe footer { color: var(--muted); font-size: .9rem; }
-.cartao h2 { margin-top: 18px; font-size: 1.25rem; }
-.cartao p { flex: 1; }
-.cartao__rodape { align-items: center; margin-top: 18px; }
-.cartao__rodape a { font-weight: 700; }
-
-.detalhe { max-width: 800px; margin-inline: auto; }
-.detalhe h1 { font-size: clamp(2rem, 5vw, 3rem); }
-.detalhe__conteudo { margin-block: 28px; font-size: 1.15rem; }
-.voltar { display: inline-block; margin-bottom: 28px; font-weight: 700; }
-
-.estado-vazio, .mensagem-sistema { text-align: center; }
-.codigo-erro { margin: 0; color: var(--azul-700); font-size: 4rem; font-weight: 900; }
-code { padding: 2px 6px; border-radius: 4px; background: var(--azul-100); }
-
-.rodape {
-  padding-block: 24px;
-  color: var(--branco);
-  background: var(--azul-900);
-  text-align: center;
-}
-
-@media (max-width: 850px) {
-  .grade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 600px) {
-  .cabecalho__conteudo { align-items: flex-start; flex-direction: column; padding-block: 18px; }
-  .grade { grid-template-columns: 1fr; }
-  .conteudo-principal { padding-block: 32px 48px; }
-  .cartao__rodape, .detalhe footer { align-items: flex-start; flex-direction: column; }
-}
-
-
-/* ===== Achados e Perdidos: lista de itens ===== */
-
-.acoes-itens {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
+
+.cartao .categoria {
+  color: var(--verde);
+  font-size: 0.75rem;
+}
+
+.identificador {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* ===== Imagens dos cartões ===== */
 
 .item-imagem {
   display: block;
   width: 100%;
-  height: 180px;
-  margin-bottom: 16px;
-  border-radius: 12px;
-  object-fit: cover;
+  height: 110px;
+  margin: 0 0 12px;
+  border: 2px solid var(--borda);
+  border-radius: 8px;
+  object-fit: contain;
   background: var(--azul-100);
 }
 
-.item-local,
-.item-data {
-  color: var(--muted);
-  font-size: 0.92rem;
-  margin: 4px 0;
+/* ===== Informações dos cartões ===== */
+
+.cartao h2 {
+  margin: 0 0 10px;
+  color: var(--azul-900);
+  font-size: 1.1rem;
+  line-height: 1.3;
 }
 
-/* Situação do objeto */
+.cartao .item-situacao {
+  align-self: flex-start;
+  margin-bottom: 8px;
+}
+
+.cartao p {
+  margin: 4px 0;
+  font-size: 0.88rem;
+}
+
+.cartao p strong {
+  color: var(--texto);
+}
+
+.cartao__rodape {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.cartao__rodape a {
+  display: inline-block;
+  padding: 7px 13px;
+  border: 1px solid var(--azul-700);
+  border-radius: 7px;
+  color: var(--azul-700);
+  background: var(--branco);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.cartao__rodape a:hover,
+.cartao__rodape a:focus {
+  color: var(--branco);
+  background: var(--azul-700);
+}
+
+/* ===== Situação do objeto ===== */
 
 .item-situacao {
   display: inline-block;
@@ -240,7 +318,27 @@ code { padding: 2px 6px; border-radius: 4px; background: var(--azul-100); }
   background: #dfecff;
 }
 
-/* Botão secundário */
+/* ===== Local e data ===== */
+
+.item-local,
+.item-data {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 4px 0;
+}
+
+/* ===== Ações da listagem ===== */
+
+.acoes-itens {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* ===== Botão secundário ===== */
 
 .botao-secundario {
   display: inline-block;
@@ -259,7 +357,21 @@ code { padding: 2px 6px; border-radius: 4px; background: var(--azul-100); }
   background: var(--azul-100);
 }
 
-/* ===== Tela de detalhes do item ===== */
+/* ===== Tela de detalhes ===== */
+
+.detalhe {
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.detalhe h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.detalhe__conteudo {
+  margin-block: 28px;
+  font-size: 1.15rem;
+}
 
 .detalhe-item {
   display: grid;
@@ -287,16 +399,85 @@ code { padding: 2px 6px; border-radius: 4px; background: var(--azul-100); }
   margin-top: 8px;
 }
 
+.detalhe footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.voltar {
+  display: inline-block;
+  margin-bottom: 28px;
+  font-weight: 700;
+}
+
+/* ===== Estados vazios e erros ===== */
+
+.estado-vazio,
+.mensagem-sistema {
+  text-align: center;
+}
+
+.codigo-erro {
+  margin: 0;
+  color: var(--azul-700);
+  font-size: 4rem;
+  font-weight: 900;
+}
+
+code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--azul-100);
+}
+
+/* ===== Rodapé ===== */
+
+.rodape {
+  padding-block: 24px;
+  color: var(--branco);
+  background: var(--azul-900);
+  text-align: center;
+}
+
 /* ===== Responsividade ===== */
 
+@media (max-width: 850px) {
+  .grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 600px) {
+  .cabecalho__conteudo {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-block: 18px;
+  }
+
+  .grade {
+    grid-template-columns: 1fr;
+  }
+
+  .conteudo-principal {
+    padding-block: 32px 48px;
+  }
+
+  .cartao__rodape,
+  .detalhe footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .acoes-itens {
     align-items: stretch;
     flex-direction: column;
   }
 
   .item-imagem {
-    height: 200px;
+    height: 150px;
   }
 
   .detalhe-item {

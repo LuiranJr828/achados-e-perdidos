@@ -1,3 +1,4 @@
+
 <header class="titulo-pagina">
   <p class="rotulo">Achados e Perdidos</p>
 
@@ -12,7 +13,10 @@
 </header>
 
 {{#if possuiItens}}
-  <section class="grade" aria-label="Lista de itens perdidos e encontrados">
+  <section
+    class="grade"
+    aria-label="Lista de itens perdidos e encontrados"
+  >
     {{#each itens}}
       {{> cartao-item}}
     {{/each}}
