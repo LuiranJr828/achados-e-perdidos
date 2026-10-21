@@ -1,8 +1,8 @@
 {
-  "name": "mural-servidor-aula-02",
+  "name": "achados-e-perdidos",
   "version": "1.0.0",
   "private": true,
-  "description": "Projeto didático completo da Aula 02 de Programação para Internet.",
+  "description": "Projeto de PPI da Etapa 3 - Achados e Perdidos",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
