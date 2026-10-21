@@ -1,131 +1,287 @@
 # Achados e Perdidos
 
-## Integrantes
+## 1. Integrantes
 
 - Luiran Bezerra da Silva Junior
 - Dayvid Jhonatas Firme da Costa
 - Sarah Joquebede da Silva
 - João Felipe de Oliveira Pinheiro
 
-## Sobre o projeto
+## 2. Sobre o projeto
 
-O **Achados e Perdidos** é uma aplicação web desenvolvida para a disciplina de Programação para Internet. O projeto tem como objetivo facilitar a consulta de objetos perdidos e encontrados no campus do IFRN, ajudando os estudantes a localizar seus pertences.
+O **Achados e Perdidos** é uma aplicação web desenvolvida como parte da disciplina de Programação para Internet (PPI), na Etapa 3. O projeto tem como objetivo facilitar a consulta de objetos perdidos ou encontrados nas dependências do IFRN.
 
-Por meio da plataforma, é possível visualizar uma lista de objetos e consultar informações como nome, categoria, local, data, situação e imagem.
+A ideia surgiu da necessidade de ajudar estudantes a localizar seus pertences ou verificar se algum objeto perdido foi encontrado por outra pessoa. Para isso, a aplicação reúne informações sobre os objetos cadastrados, permitindo consultar sua descrição, categoria, local, data, situação e imagem.
 
-## Tecnologias utilizadas
+O sistema apresenta uma página inicial com os registros mais recentes, uma página com a listagem dos objetos e uma página de detalhes para consultar cada registro individualmente.
 
-- **Node.js:** utilizado para executar JavaScript no servidor.
-- **Express:** utilizado para configurar o servidor e as rotas da aplicação.
-- **Handlebars:** utilizado para gerar as páginas HTML com os dados do sistema.
-- **Sequelize:** utilizado para facilitar a comunicação com o banco de dados.
-- **SQLite:** utilizado para armazenar as informações dos objetos.
-- **HTML e CSS:** utilizados na estrutura e na aparência das páginas.
-- **Node Test e Supertest:** utilizados na realização de testes automatizados.
+## 3. Tecnologias utilizadas
 
-## Pré-requisitos
+As principais tecnologias utilizadas no desenvolvimento foram:
 
-Para executar o projeto, é necessário ter o Node.js versão 18 ou superior instalado, além do NPM, que acompanha a instalação do Node.js.
+- **Node.js:** ambiente utilizado para executar o JavaScript no servidor.
+- **Express:** framework responsável pela configuração do servidor web, pelas rotas e pelos middlewares.
+- **Express Handlebars:** utilizado para gerar as páginas HTML dinamicamente a partir dos dados da aplicação.
+- **Sequelize:** biblioteca utilizada para definir o modelo dos objetos e realizar consultas e operações no banco de dados.
+- **SQLite:** banco de dados responsável por armazenar os registros dos objetos.
+- **HTML e CSS:** utilizados para estruturar e estilizar as páginas da aplicação.
+- **Node.js Test Runner:** ferramenta nativa do Node.js utilizada para executar os testes automatizados.
+- **Supertest:** biblioteca utilizada para realizar requisições HTTP durante os testes, verificando as respostas das rotas.
 
-Para verificar se estão instalados, execute os comandos no terminal:
+## 4. Pré-requisitos
+
+Para executar o projeto, é necessário ter instalado:
+
+- Node.js versão 18 ou superior.
+- NPM, que normalmente é instalado junto com o Node.js.
+- Um navegador web para acessar a aplicação.
+
+Para verificar se o Node.js e o NPM estão instalados, execute os seguintes comandos no terminal:
 
 ```bash
 node -v
 npm -v
 ```
 
-## Como instalar e executar
+## 5. Instalação e execução
 
-### 1. Instalar as dependências
+### 5.1. Instalar as dependências
 
-Abra o terminal na pasta principal do projeto e execute:
+Abra o terminal na pasta principal do projeto, onde está localizado o arquivo `package.json`, e execute:
 
 ```bash
 npm install
 ```
 
-Esse comando instala as bibliotecas necessárias para o funcionamento da aplicação.
+Esse comando instala as bibliotecas necessárias para executar a aplicação e os testes.
 
-### 2. Iniciar o servidor
+### 5.2. Iniciar o servidor
 
-Após a instalação, execute:
+Após instalar as dependências, execute:
 
 ```bash
 npm start
 ```
 
-O servidor será iniciado na porta 3000 por padrão. Em seguida, acesse o endereço abaixo no navegador:
+O servidor prepara o banco de dados e inicia a aplicação na porta 3000 por padrão.
+
+Depois da inicialização, acesse o seguinte endereço no navegador:
 
 http://localhost:3000
 
-### 3. Executar os testes
+### 5.3. Executar em modo de desenvolvimento
 
-Para executar os testes automatizados do projeto, utilize:
+O projeto também possui um comando para iniciar o servidor com reinicialização automática quando os arquivos monitorados são alterados:
+
+```bash
+npm run dev
+```
+
+### 5.4. Executar os testes
+
+Para executar os testes automatizados, utilize:
 
 ```bash
 npm test
 ```
 
-## Funcionalidades
+Os testes verificam as respostas das rotas, a apresentação dos registros, a consulta de detalhes, o endpoint de saúde e o tratamento de endereços e identificadores inválidos.
 
-- Apresentação do sistema na página inicial.
-- Exibição dos três itens mais recentes na página inicial.
-- Listagem dos objetos registrados no sistema.
-- Consulta dos detalhes de cada objeto.
-- Exibição da categoria, do local, da data e da situação dos itens.
-- Apresentação de uma página de erro quando um endereço ou item não é encontrado.
-- Verificação do funcionamento do servidor por meio de uma rota de saúde.
+## 6. Funcionalidades
 
-## Dados dos objetos
+A aplicação possui as seguintes funcionalidades:
 
-A aplicação utiliza a entidade `Item` para representar os objetos armazenados no banco de dados.
+- **Página inicial:** apresenta o projeto e exibe até três objetos em destaque, consultados no banco de dados.
+- **Listagem de objetos:** apresenta os registros cadastrados, organizados pela data em ordem decrescente.
+- **Detalhamento:** permite acessar um objeto específico por meio de seu identificador.
+- **Identificação da situação:** informa se o objeto foi encontrado, está perdido, está em andamento ou foi devolvido.
+- **Exibição de imagens:** permite associar uma imagem a cada objeto cadastrado.
+- **Página de erro 404:** informa quando uma página não existe ou quando um objeto não é encontrado.
+- **Tratamento de erros internos:** apresenta uma página de erro quando ocorre uma falha inesperada no servidor.
+- **Endpoint de saúde:** disponibiliza uma rota para verificar se a aplicação está respondendo.
 
-Cada item possui os seguintes campos:
+## 7. Entidade principal e banco de dados
 
-| Campo | Descrição |
-|---|---|
-| `objeto` | Nome do objeto. |
-| `categoria` | Categoria do objeto. |
-| `local` | Local relacionado à ocorrência. |
-| `data` | Data da ocorrência. |
-| `situacao` | Situação atual do objeto. |
-| `imagem` | Caminho da imagem do objeto. |
+A entidade principal do sistema é **Item**, definida por meio do Sequelize e armazenada no banco de dados SQLite.
 
-As situações utilizadas são: Encontrado, Perdido, Em andamento e Devolvido.
+Cada registro representa um objeto perdido ou encontrado no campus.
 
-O sistema possui seis registros iniciais, que são inseridos no banco de dados quando a tabela ainda está vazia. Dessa forma, os mesmos registros não são adicionados novamente sempre que o servidor é iniciado.
+### 7.1. Campos da entidade
 
-A listagem é organizada pela data em ordem decrescente, mostrando primeiro os registros mais recentes.
-
-## Rotas da aplicação
-
-| Método | Rota | Descrição |
+| Campo | Tipo | Descrição |
 |---|---|---|
-| GET | `/` | Exibe a página inicial. |
-| GET | `/saude` | Retorna informações sobre o funcionamento do servidor em formato JSON. |
-| GET | `/itens` | Exibe a lista de objetos. |
-| GET | `/itens/:id` | Exibe os detalhes de um objeto específico. |
+| `id` | Inteiro | Identificador único do registro, gerado automaticamente. |
+| `objeto` | Texto (`STRING`) | Nome ou descrição do objeto. |
+| `categoria` | Texto (`STRING`) | Categoria à qual o objeto pertence. |
+| `local` | Texto (`STRING`) | Local relacionado ao objeto. |
+| `data` | Data (`DATEONLY`) | Data associada ao registro do objeto. |
+| `situacao` | Texto (`STRING`) | Situação atual do objeto. |
+| `imagem` | Texto (`STRING`) | Caminho da imagem associada ao objeto. |
 
-Quando um endereço não existe ou o identificador de um item é inválido, a aplicação apresenta uma página de erro 404.
+Os campos `objeto`, `categoria`, `local`, `data`, `situacao` e `imagem` são obrigatórios e possuem validações definidas no modelo.
 
-## Organização do projeto
+O campo `situacao` aceita os seguintes valores:
 
-O código foi dividido em pastas e arquivos para facilitar a organização e a manutenção da aplicação.
+- `Encontrado`
+- `Perdido`
+- `Em andamento`
+- `Devolvido`
 
-- `app.js`: configura o Express, o Handlebars, os middlewares, as rotas e o tratamento de erros. Também contém a função responsável por preparar o banco de dados e inserir os registros iniciais.
-- `server.js`: prepara o banco de dados e inicia o servidor.
-- `models/`: contém a configuração do banco de dados e a definição da entidade `Item`.
-- `routes/`: contém as rotas da página inicial e da listagem e detalhamento dos objetos.
-- `views/`: contém os arquivos Handlebars responsáveis pela apresentação das páginas.
-- `public/`: armazena os arquivos estáticos, como imagens e arquivos CSS.
-- `test/`: contém os arquivos utilizados nos testes automatizados.
-- `database/`: armazena o arquivo do banco de dados SQLite utilizado pela aplicação.
+Além desses campos, o Sequelize administra os campos de data de criação e atualização do registro, pois o modelo utiliza `timestamps: true`.
 
-A organização segue uma estrutura inspirada no padrão MVC, separando os dados, o controle das requisições e a apresentação das páginas.
+### 7.2. Preparação do banco de dados
 
-## Considerações finais
+A preparação do banco é realizada pela função `prepararBanco()`, localizada em `app.js`.
 
-O desenvolvimento deste projeto permite colocar em prática os conhecimentos de programação para a internet, utilizando um servidor Node.js, rotas com Express, templates Handlebars e armazenamento de dados com SQLite e Sequelize.
+Essa função verifica a conexão, sincroniza o modelo com o banco e consulta a quantidade de registros existentes. Caso a tabela esteja vazia, são inseridos seis objetos iniciais.
 
-A proposta é oferecer uma maneira simples e organizada de consultar objetos perdidos e encontrados no campus do IFRN, facilitando o acesso às informações pelos estudantes.
+Os registros utilizados como dados iniciais são:
 
+1. Garrafa azul — Biblioteca.
+2. Caderno preto — Sala 05.
+3. Chave com cordão — Pátio.
+4. Estojo vermelho — Laboratório de informática.
+5. Casaco cinza — Auditório.
+6. Cartão de transporte — Entrada principal.
+
+Os registros possuem datas e situações diferentes, permitindo demonstrar a listagem e o detalhamento dos objetos.
+
+A inserção inicial ocorre somente quando não existem registros na tabela, evitando que os seis objetos sejam duplicados a cada inicialização normal da aplicação.
+
+## 8. Rotas disponíveis
+
+As rotas são responsáveis por receber as requisições do navegador, consultar os dados necessários e definir a resposta que será apresentada.
+
+| Método | Rota | Função |
+|---|---|---|
+| `GET` | `/` | Apresenta a página inicial e os três objetos em destaque. |
+| `GET` | `/saude` | Retorna um JSON indicando o estado da aplicação. |
+| `GET` | `/itens` | Apresenta a listagem dos objetos cadastrados. |
+| `GET` | `/itens/:id` | Apresenta os detalhes do objeto correspondente ao identificador informado. |
+| `GET` | Qualquer rota inexistente | Retorna a página de erro 404. |
+
+Na rota `/itens/:id`, o identificador é validado antes da consulta ao banco. Se for inválido ou não corresponder a um registro existente, a aplicação apresenta a resposta 404 com a mensagem de que o item não foi encontrado.
+
+A rota `/saude` retorna um JSON semelhante ao exemplo abaixo:
+
+```json
+{
+  "status": "ok",
+  "aplicacao": "achados-e-perdidos"
+}
+```
+
+## 9. Organização dos arquivos e diretórios
+
+O projeto foi organizado em arquivos e diretórios que separam as responsabilidades da aplicação.
+
+```text
+achados-e-perdidos/
+├── app.js
+├── server.js
+├── package.json
+├── package-lock.json
+├── README.md
+├── models/
+│   ├── index.js
+│   └── item.js
+├── routes/
+│   ├── index.js
+│   └── itens.js
+├── views/
+│   ├── layouts/
+│   │   └── main.hbs
+│   ├── partials/
+│   ├── index.hbs
+│   ├── 404.hbs
+│   ├── erro.hbs
+│   └── itens/
+│       ├── listar.hbs
+│       └── detalhar.hbs
+├── public/
+│   ├── img/
+│   └── stylesheets/
+│       └── style.css
+├── database/
+│   └── mural.sqlite
+└── test/
+    └── app.test.js
+```
+
+
+### Responsabilidade de cada parte
+
+- **`app.js`:** configura o Express, o Handlebars, os arquivos estáticos, os middlewares, as rotas e o tratamento de erros. Também contém a função responsável pela preparação do banco e pelos dados iniciais.
+- **`server.js`:** executa a preparação do banco e inicia o servidor na porta configurada.
+- **`package.json`:** registra as informações do projeto, as dependências e os comandos de execução e teste.
+- **`models/`:** define a entidade `Item` e configura a conexão com o banco de dados SQLite.
+- **`routes/`:** contém as rotas da página inicial, do endpoint de saúde, da listagem e dos detalhes dos objetos.
+- **`views/`:** contém os arquivos Handlebars que geram as páginas HTML apresentadas ao usuário.
+- **`views/layouts/`:** contém o layout principal compartilhado pelas páginas.
+- **`views/partials/`:** permite organizar componentes visuais reutilizáveis, evitando repetir o mesmo código HTML em diferentes páginas.
+- **`public/`:** armazena os arquivos estáticos, como imagens e folhas de estilo CSS.
+- **`database/`:** armazena o arquivo do banco SQLite utilizado pela aplicação.
+- **`test/`:** contém os testes automatizados que verificam o funcionamento das rotas e das respostas da aplicação.
+
+A organização separa as responsabilidades entre configuração, inicialização, acesso aos dados, rotas, apresentação e testes, seguindo uma estrutura inspirada no padrão MVC.
+
+## 10. Testes automatizados
+
+Os testes estão localizados em `test/app.test.js` e utilizam o test runner nativo do Node.js em conjunto com a biblioteca Supertest.
+
+Antes dos testes, a aplicação prepara o banco de dados e cria a instância do Express. Ao final, a conexão com o banco é encerrada.
+
+O arquivo possui testes para verificar:
+
+1. Se a página inicial responde com status HTTP 200 e apresenta o título do projeto.
+2. Se a listagem apresenta registros e os elementos esperados.
+3. Se os objetos iniciais, como a garrafa azul e o caderno preto, aparecem na listagem.
+4. Se a rota `/itens/1` retorna o objeto esperado.
+5. Se a página de detalhes apresenta corretamente um objeto existente.
+6. Se um identificador inválido, como `/itens/abc`, retorna status 404.
+7. Se um objeto inexistente retorna status 404.
+8. Se o endpoint `/saude` retorna um JSON com os dados esperados.
+9. Se uma rota inexistente apresenta a página de erro 404.
+
+Para executar todos os testes, utilize:
+
+```bash
+npm test
+```
+
+O resultado permite identificar problemas no funcionamento das rotas e verificar se os principais comportamentos previstos estão sendo atendidos.
+
+## 11. Relação com os quatro wireframes
+
+Os wireframes servem como referência para a organização das informações e para a estrutura visual das páginas. A aplicação utiliza essas referências para organizar as funcionalidades de consulta dos objetos.
+
+- **Wireframe da página inicial:** corresponde à rota `/`, que apresenta a identificação do projeto e até três objetos em destaque obtidos do banco de dados.
+- **Wireframe da listagem:** corresponde à rota `/itens`, responsável por apresentar os registros cadastrados de maneira organizada.
+- **Wireframe do detalhamento:** corresponde à rota `/itens/:id`, que permite consultar individualmente as informações de um objeto.
+- **Wireframe da página 404:** corresponde às situações em que o usuário acessa uma rota inexistente ou tenta consultar um objeto que não foi localizado.
+
+A implementação deve preservar a composição e a hierarquia de informações previstas nos wireframes específicos do grupo, incluindo a organização dos elementos, a apresentação dos registros e as ações disponíveis em cada página.
+
+## 12. Decisões e adaptações realizadas pelo grupo
+
+Durante o desenvolvimento, foram adotadas decisões para adaptar a estrutura do projeto-base ao sistema de Achados e Perdidos.
+
+- **Adaptação da entidade:** o modelo foi definido como `Item`, com campos específicos para descrever objetos perdidos ou encontrados.
+- **Persistência dos dados:** os registros são armazenados no SQLite e acessados por meio do Sequelize, em vez de serem mantidos apenas em arrays ou escritos diretamente nas páginas.
+- **Dados iniciais:** foram definidos seis objetos para demonstrar o funcionamento do sistema desde a primeira execução.
+- **Prevenção de duplicações:** os dados iniciais são inseridos somente quando a tabela está vazia.
+- **Ordenação dos registros:** a listagem apresenta os objetos em ordem decrescente de data.
+- **Destaques na página inicial:** são consultados até três registros no banco de dados para compor a página inicial.
+- **Validação dos identificadores:** a rota de detalhes verifica se o identificador informado é válido antes de consultar o banco.
+- **Tratamento de erros:** foram implementadas respostas para páginas e objetos não encontrados, além de um middleware para falhas internas.
+- **Formatação de datas:** foi criado um helper para apresentar datas no formato utilizado no Brasil.
+- **Organização do código:** as responsabilidades foram distribuídas entre arquivos de configuração, servidor, modelos, rotas, views e testes.
+- **Verificação do funcionamento:** foram criados testes automatizados para conferir as principais rotas e situações de erro.
+
+Essas decisões procuram manter a aplicação organizada, facilitar sua manutenção e atender aos requisitos técnicos e funcionais definidos para o projeto.
+
+## 13. Considerações finais
+
+O desenvolvimento do Achados e Perdidos permite aplicar conhecimentos de programação para a web, incluindo a criação de rotas, a utilização de templates dinâmicos, a persistência de dados em banco de dados relacional e a realização de testes automatizados.
+
+Além do aprendizado técnico, o projeto propõe uma solução para uma situação cotidiana no ambiente escolar, facilitando a consulta de informações sobre objetos perdidos ou encontrados no campus do IFRN.
